@@ -10,8 +10,9 @@ export const NavbarContainer = styled.nav`
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
   font-family: sans-serif;
-  margin: clamp(1rem, 3vw, 2rem) auto;
+  margin: clamp(1rem, 3vw, 2rem) ;
 `;
+
 export const NavLinks = styled.div`
   display: flex;
   align-items: center;

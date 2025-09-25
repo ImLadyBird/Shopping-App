@@ -10,8 +10,8 @@ export default function Nav() {
         <img src={logo} alt="logo" />
       </div>
       <NavLinks>
-        <StyledNavLink to="/">Home</StyledNavLink>
-        <StyledNavLink to="/signup">Sign Up</StyledNavLink>
+        <StyledNavLink to="cart">Home</StyledNavLink>
+        <StyledNavLink to="/">Sign Up</StyledNavLink>
         <NavLink to="/">
           <img src={cartimg} alt="cart" />
         </NavLink>

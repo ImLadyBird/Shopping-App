@@ -6,7 +6,7 @@ function signup(user) {
 }
 
 export default function useSignUp() {
-  useMutation({
+ return useMutation({
     mutationKey: ["signup"],
     mutationFn: (user) => signup(user),
   });

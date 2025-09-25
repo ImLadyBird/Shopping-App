@@ -1,19 +1,19 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter } from "react-router";
 import Cart from './components/pages/Cart'
 import SignUp from './components/pages/SignUp'
 import SignIn from './components/pages/SignIn'
 
 export const router = createBrowserRouter([
     {
-        path: '/',
-        element: <Cart/>
-    },
-    {
-        path: '/signup',
+        path: "/",
         element: <SignUp/>
     },
     {
-        path: '/signin',
+        path: "cart",
+        element: <Cart/>
+    },
+    {
+        path: "signin",
         element: <SignIn/>
     }
 ])
