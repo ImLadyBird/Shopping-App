@@ -14,7 +14,6 @@ import {
 import { useForm } from "react-hook-form";
 import useSignUp from "../../mutations/useSignUp";
 import { useNavigate } from "react-router";
-import { toast } from "react-toastify";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -37,15 +36,14 @@ export default function SignUp() {
     reset,
     formState: { errors },
   } = useForm({ resolver: zodResolver(forSchema) });
-  const { mutate : signUp } = useSignUp();
+  const { mutate: signUp } = useSignUp();
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
     signUp(data, {
       onSuccess() {
         reset();
-        toast.success("Sign Up Successful");
-        navigate("/signin");
+        setTimeout(() => navigate("/signin"), 100);
       },
     });
   };
@@ -62,27 +60,21 @@ export default function SignUp() {
           <label htmlFor="">Username</label>
           <Input
             type="text"
-            {...register("username", { required: "Username is required" })}
+            {...register("username")}
             error={errors.username?.message}
           />
           <ErrorSpan>{errors?.username?.message}</ErrorSpan>
           <label htmlFor="">Email</label>
           <Input
             type="text"
-            {...register("email", { required: "Email is required" })}
+            {...register("email")}
             error={errors.email?.message}
           />
           <ErrorSpan>{errors?.email?.message}</ErrorSpan>
           <label htmlFor="">Password</label>
           <Input
             type="password"
-            {...register("password", {
-              required: "Password is required",
-              minLength: {
-                value: 6,
-                message: "Password must be at least 6 characters",
-              },
-            })}
+            {...register("password")}
             error={errors.password?.message}
           />
           <ErrorSpan>{errors?.password?.message}</ErrorSpan>
