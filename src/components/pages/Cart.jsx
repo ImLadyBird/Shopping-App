@@ -1,7 +1,18 @@
 import { useEffect, useReducer } from "react";
 import Nav from "../Shared/Nav";
 import { useGetProducts } from "../../queries/useGetProducts";
-import { Button, ButtonContainer, CartContainer, CartItem, CartItemImg, Title, TrashButton } from "./Cart.Styled";
+import {
+  Button,
+  ButtonContainer,
+  CartContainer,
+  CartItem,
+  CartItemImg,
+  Loading,
+  LoadingContainer,
+  Title,
+  TrashButton,
+} from "./Cart.Styled";
+import loadingimg from "../../images/loading.svg";
 
 const actions = {
   SET_PRODUCTS: "SET_PRODUCTS",
@@ -41,7 +52,12 @@ export default function Cart() {
   }, [products?.data]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <LoadingContainer>
+        {" "}
+        <Loading src={loadingimg} alt="loading" />{" "}
+      </LoadingContainer>
+    );
   }
 
   function removeItem(id) {
@@ -54,39 +70,36 @@ export default function Cart() {
 
   return (
     <>
-      <Nav />
+      <Nav count={state.products.length} />
       <Title>Products</Title>
       <CartContainer>
         {state.products.map(({ id, attributes }) => {
-          const { title, image ,price } = attributes;
+          const { title, price, image } = attributes;
           return (
             <CartItem key={id}>
               <CartItemImg src={image} alt={title} />
               <h3>{title}</h3>
               <p>{price}$</p>
-              <TrashButton onClick={() => removeItem(id)}>
-                Delete
-              </TrashButton>
+              <TrashButton onClick={() => removeItem(id)}>Delete</TrashButton>
             </CartItem>
           );
         })}
         <ButtonContainer>
-        <Button onClick={removeAll}>Remove All</Button>
-        <Button
-          onClick={() => {
-            if (products?.data) {
-              dispatch({
-                type: actions.SET_PRODUCTS,
-                payload: products.data,
-              });
-            }
-          }}
-        >
-          Add All
-        </Button>
-      </ButtonContainer>
+          <Button onClick={removeAll}>Remove All</Button>
+          <Button
+            onClick={() => {
+              if (products?.data) {
+                dispatch({
+                  type: actions.SET_PRODUCTS,
+                  payload: products.data,
+                });
+              }
+            }}
+          >
+            Add All
+          </Button>
+        </ButtonContainer>
       </CartContainer>
-      
     </>
   );
 }

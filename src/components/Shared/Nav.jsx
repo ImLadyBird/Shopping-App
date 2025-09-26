@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
 import logo from "../../images/Shopedia.png";
 import cartimg from "../../images/cart.png";
-import { NavbarContainer, NavLinks, StyledNavLink  } from "./Nav.styled";
+import { ItemCount, NavbarContainer, NavLinks, StyledNavLink, TrashContainer  } from "./Nav.styled";
 
-export default function Nav() {
+export default function Nav({count}) {
   return (
     <NavbarContainer>
       <div>
@@ -12,9 +12,10 @@ export default function Nav() {
       <NavLinks>
         <StyledNavLink to="cart">Home</StyledNavLink>
         <StyledNavLink to="/">Sign Up</StyledNavLink>
-        <NavLink to="/">
+        <TrashContainer >
           <img src={cartimg} alt="cart" />
-        </NavLink>
+          <ItemCount>{count}</ItemCount>
+        </TrashContainer>
       </NavLinks>
     </NavbarContainer>
   );

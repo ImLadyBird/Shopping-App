@@ -29,3 +29,18 @@ export const StyledNavLink = styled(NavLink)`
     color: #f57c00;
   }
 `;
+export const TrashContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: clamp(2rem, 3vw, 4rem);
+  font-size: 1rem;
+  position: relative;
+`;
+export const ItemCount = styled.span`
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  position: absolute;
+  top: 3px;
+  right: 7px;
+`;  
