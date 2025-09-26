@@ -17,7 +17,6 @@ import { useNavigate } from "react-router";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-
 const forSchema = z.object({
   email: z.email({ message: "Email is not valid" }),
   password: z
@@ -27,23 +26,27 @@ const forSchema = z.object({
 });
 
 export default function SignIn() {
+  const { mutate: signin } = useSignIn();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(forSchema) });
+  const navigate = useNavigate();
 
-  const {mutate: signin} = useSignIn()
-  const {register, handleSubmit,reset,formState: { errors }} = useForm({ resolver: zodResolver(forSchema) });
-  const navigate = useNavigate()
-
-  const onSubmit = ({email, password}) => {
-    signin({identifier: email, password}, {
-      onSuccess(res) {
-        reset();
-        localStorage.setItem('token', res.data.jwt)
-        navigate("/cart")
+  const onSubmit = ({ email, password }) => {
+    signin(
+      { identifier: email, password },
+      {
+        onSuccess(res) {
+          reset();
+          localStorage.setItem("token", res.data.jwt);
+          navigate("/cart");
+        },
       }
-    })
+    );
   };
-
-
-
 
   return (
     <SignUpPage>
@@ -76,7 +79,7 @@ export default function SignIn() {
           <ErrorSpan>{errors?.password?.message}</ErrorSpan>
           <Button>Sign In</Button>
           <Span>
-           Do not an account? <Linko href="/">Sign Up</Linko>
+            Do not an account? <Linko href="/">Sign Up</Linko>
           </Span>
         </SignUPForm>
       </SignUpContainer>
